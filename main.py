@@ -2,34 +2,36 @@ import subprocess
 
 
 def downloader():
-    songs = read_file()
-    no_of_songs = len(songs)
+    youtube_search_names = read_file()
 
-    command = ['youtube-dl',
-               '-o',
-               './downloads/%(title)s.%(ext)s',
-               '-x',
-               '--audio-format',
-               'mp3',
-               ]
+    no_of_searches = len(youtube_search_names)
 
-    for index in range(no_of_songs):
-        song_name = songs[index].strip()
-        search_query = f'ytsearch:{song_name}'
+    for index in range(no_of_searches):
 
-        command.append(search_query)
+        command = ['youtube-dl',
+                   '-o',
+                   './downloads/%(title)s.%(ext)s',
+                   '-x',
+                   '--audio-format',
+                   'mp3'
+                   ]
 
-        print(f'\n Downloading song {index + 1} out of {no_of_songs} \n')
+        video_name = youtube_search_names[index].strip()
+        search_option = f'ytsearch:{video_name}'
+
+        command.append(search_option)
+
+        print(f'\n Downloading song {index + 1} out of {no_of_searches} \n')
         subprocess.call(command)
 
 
 def read_file():
-    song_list_file = open('songs.txt', 'r')
+    source_file = open('test.txt', 'r')
 
-    songs = song_list_file.readlines()
-    song_list_file.close()
+    youtube_search_names = source_file.readlines()
+    source_file.close()
 
-    return songs
+    return youtube_search_names
 
 
 downloader()
