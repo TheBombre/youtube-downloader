@@ -1,37 +1,45 @@
-import subprocess
+import PySimpleGUI as sg
+from Downloader import Downloader
 
+window_title = 'Youtube Downloader'
+theme = 'DarkAmber'
+pad = 10
+sg.change_look_and_feel('DarkBlue1')
 
-def downloader():
-    youtube_search_names = read_file()
+buttons = [
+    sg.Button(
+        button_text='mp3', pad=(
+            (50, pad), (pad, pad)), font=24
+    ),
+    sg.Button(button_text='mp4', font=24),
+    sg.Button(button_text='playlist-mp3', font=24),
+    sg.Button(button_text='playlist-mp4', font=24)]
 
-    no_of_searches = len(youtube_search_names)
+search = [sg.In(size=(50, 200), font='75', key='url')]
+text = [sg.Text(text='Enter youtube url', font=25, pad=(0, 20))]
 
-    for index in range(no_of_searches):
+layout = [text, search, buttons]
 
-        command = ['youtube-dl',
-                   '-o',
-                   './downloads/%(title)s.%(ext)s',
-                   '-x',
-                   '--audio-format',
-                   'mp3'
-                   ]
+window = sg.Window(window_title, layout)
 
-        video_name = youtube_search_names[index].strip()
-        search_option = f'ytsearch:{video_name}'
+while True:
+    event, values = window.read()
+    downloader = Downloader()
+    url = values['url']
 
-        command.append(search_option)
+    if event == 'mp4':
+        downloader.video_format(download_playlist=False)
 
-        print(f'\n Downloading song {index + 1} out of {no_of_searches} \n')
-        subprocess.call(command)
+    elif event == 'mp3':
+        downloader.audio_format(download_playlist=False)
 
+    elif event == 'playlist-mp3':
+        downloader.playlist_audio_format()
 
-def read_file():
-    source_file = open('test.txt', 'r')
+    elif event == 'playlist-mp4':
+        downloader.playlist_video_format()
 
-    youtube_search_names = source_file.readlines()
-    source_file.close()
+    downloader.download(url)
+    del downloader
 
-    return youtube_search_names
-
-
-downloader()
+window.close()
