@@ -1,6 +1,7 @@
 __pycache__/
 lib/
 include/
+build/
 bin/
 
 .env
