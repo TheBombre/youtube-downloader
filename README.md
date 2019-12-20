@@ -1,4 +1,4 @@
-# Youtube Downloader(YD)
+# Youtube Downloader (YD)
 
 # Description
 
@@ -14,6 +14,8 @@ Next, ensure the latest version of python is installed from [here](https://www.p
 $ python3 -m venv youtube-downloader
 $ cd youtube-downloader
 $ git clone https://github.com/infectious42/youtube-downloader.git
+$ source bin/activate # bin/activate on windows
+$ pip install pytube youtube-dl cx_Freeze
 ```
 
 Finally, running the program:

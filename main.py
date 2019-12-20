@@ -9,13 +9,14 @@ sg.change_look_and_feel('DarkBlue1')
 buttons = [
     sg.Button(
         button_text='mp3', pad=(
-            (50, pad), (pad, pad)), font=24
+            (20, pad), (pad, pad)), font=24
     ),
     sg.Button(button_text='mp4', font=24),
     sg.Button(button_text='playlist-mp3', font=24),
-    sg.Button(button_text='playlist-mp4', font=24)]
+    sg.Button(button_text='playlist-mp4', font=24),
+    sg.Button(button_text='download', font=24, key='download', button_color=('white', 'green'))]
 
-search = [sg.In(size=(50, 200), font='75', key='url')]
+search = [sg.In(size=(50, 200), font='75', key='url', do_not_clear=False)]
 text = [sg.Text(text='Enter youtube url', font=25, pad=(0, 20))]
 
 layout = [text, search, buttons]
@@ -28,18 +29,17 @@ while True:
     url = values['url']
 
     if event == 'mp4':
-        downloader.video_format(download_playlist=False)
+        downloader.video(url)
 
-    elif event == 'mp3':
-        downloader.audio_format(download_playlist=False)
+    if event == 'mp3':
+        downloader.audio(url)
 
-    elif event == 'playlist-mp3':
-        downloader.playlist_audio_format()
+    if event == 'playlist-mp3':
+        downloader.playlist_audio(url)
 
-    elif event == 'playlist-mp4':
-        downloader.playlist_video_format()
+    if event == 'playlist-mp4':
+        downloader.playlist_video(url)
 
-    downloader.download(url)
-    del downloader
-
-window.close()
+    if event == 'download':
+        downloader.run_download()
+        window.close()
