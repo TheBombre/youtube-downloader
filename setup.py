@@ -1,16 +1,11 @@
 import sys
-from cx_Freeze import setup, Executable
+import os
+from PyInstaller.__main__ import run
 
-# base = None
-# if sys.platform == 'win32':
-base = 'Win32GUI'
-
-executables = [
-    Executable('main.py', base=base)
-]
-
-setup(name='Youtube Downloader',
-      version='0.1',
-      description='downloading youtube videos as videos or audios',
-      executables=executables
-      )
+run([
+    '--name=%s' % 'Youtube Downloader',
+    '--onefile',
+    '--windowed',
+    # '--icon=%s' % os.path.join('resource', 'path', 'icon.ico'),
+    os.path.join('main.py'),
+])

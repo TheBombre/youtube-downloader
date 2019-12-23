@@ -65,7 +65,6 @@ class Downloader:
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
             for url in urls:
-                print(url)
                 executor.submit(self.single_download, url, options)
 
     def run_download(self):
