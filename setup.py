@@ -6,6 +6,6 @@ run([
     '--name=%s' % 'Youtube Downloader',
     '--onefile',
     '--windowed',
-    # '--icon=%s' % os.path.join('resource', 'path', 'icon.ico'),
+    '--icon=%s' % os.path.join('resources', 'icon.ico'),
     os.path.join('main.py'),
 ])
