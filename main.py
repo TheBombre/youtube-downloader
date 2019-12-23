@@ -23,10 +23,16 @@ layout = [text, search, buttons]
 
 window = sg.Window(window_title, layout)
 
-while True:
+busy = True
+
+while busy:
     event, values = window.read()
     downloader = Downloader()
-    url = values['url']
+
+    url = None
+    print(values)
+    if values != None:
+        url = values['url']
 
     if event == 'mp4':
         downloader.video(url)
@@ -41,5 +47,6 @@ while True:
         downloader.playlist_video(url)
 
     if event == 'download':
+        busy = False
         downloader.run_download()
         window.close()

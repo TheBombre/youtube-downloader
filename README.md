@@ -11,10 +11,10 @@ First, ensure that [youtube-dl](https://github.com/ytdl-org/youtube-dl/blob/mast
 Next, ensure the latest version of python is installed from [here](https://www.python.org/downloads/). Then create a virtual environment and clone the repo using the commands below:
 
 ```
-$ python3 -m venv youtube-downloader
-$ cd youtube-downloader
 $ git clone https://github.com/infectious42/youtube-downloader.git
-$ source bin/activate # bin/activate on windows
+$ cd youtube-downloader
+$ python3 -m venv venv
+$ source venv/bin/activate # venv/bin/activate on windows
 $ pip install pytube youtube-dl cx_Freeze
 ```
 

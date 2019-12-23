@@ -1,6 +1,7 @@
 from youtube_dl import YoutubeDL
 import concurrent.futures
 from pytube import Playlist
+from config import config
 
 
 class Downloader:
@@ -10,10 +11,9 @@ class Downloader:
     playlist_video_downloads = []
 
     def __init__(self):
-
         self.audio_ydl_options = {
             'format': 'bestaudio/best',
-            'outtmpl': './downloads/%(title)s.%(ext)s',
+            'outtmpl': '{}%(title)s.%(ext)s'.format(config['outtmpl']),
             'ignoreerrors': True,
             'noplaylist': True,
             'postprocessors': [{
@@ -25,7 +25,7 @@ class Downloader:
 
         self.video_ydl_options = {
             'format': 'bestaudio/best',
-            'outtmpl': './downloads/%(title)s.%(ext)s',
+            'outtmpl': '{}%(title)s.%(ext)s'.format(config['outtmpl']),
             'ignoreerrors': True,
             'noplaylist': True,
             'postprocessors': [{

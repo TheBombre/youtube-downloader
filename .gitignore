@@ -3,6 +3,7 @@ lib/
 include/
 build/
 bin/
+dist/
 
 .env
 .venv
@@ -17,5 +18,6 @@ venv.bak/
 
 downloads/
 songs.txt
-# test.txt
+test.txt
+*.spec
 pyvenv.cfg
