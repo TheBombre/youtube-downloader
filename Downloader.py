@@ -33,7 +33,7 @@ class Downloader:
                 'preferedformat': 'mp4',
             }]
         }
-
+    # Adding chosen format to corresponding list so they can be downloaded together 
     def audio(self, url):
         self.audio_downloads.append(url)
 
@@ -46,6 +46,7 @@ class Downloader:
     def playlist_video(self, url):
         self.playlist_video_downloads.append(url)
 
+    # So all videos can be donwloaded at the same time instead of individually
     def load_playlist_urls(self, playlists):
         all_playlist_urls = []
 
@@ -68,6 +69,7 @@ class Downloader:
                 executor.submit(self.single_download, url, options)
 
     def run_download(self):
+        # Only runs when video url has been submitted for download in the lists
 
         if len(self.audio_downloads) > 0:
             print('downloading audio')
@@ -80,6 +82,8 @@ class Downloader:
 
         if len(self.playlist_audio_downloads) > 0:
             playlist_options = self.audio_ydl_options.copy()
+            
+            # Ensure the whole playlist is donwloaded, not one video
             del playlist_options['noplaylist']
 
             urls = self.load_playlist_urls(self.playlist_audio_downloads)
@@ -89,6 +93,8 @@ class Downloader:
 
         if len(self.playlist_video_downloads) > 0:
             playlist_options = self.video_ydl_options.copy()
+
+            # Ensure the whole playlist is donwloaded, not one video
             del playlist_options['noplaylist']
 
             urls = self.load_playlist_urls(self.playlist_video_downloads)

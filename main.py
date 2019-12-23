@@ -41,6 +41,7 @@ while busy:
     if values != None:
         url = values['url']
 
+        # Check chosen format
         if event == 'mp4':
             downloader.video(url)
 
